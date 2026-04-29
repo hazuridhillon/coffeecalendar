@@ -1,0 +1,2840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily — Brand Guide & Content Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --parchment: #EDE5D0;
+    --espresso: #2C1A0E;
+    --coffee: #6B3F1F;
+    --latte: #C4956A;
+    --steam: #D4C5A9;
+    --sage: #7A8C6E;
+    --blush: #E8C4A0;
+    --ink: #1A1208;
+    --mist: #F9F6F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--espresso);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--espresso);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-bottom: 1px solid rgba(196,149,106,0.3);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-logo span {
+    color: var(--latte);
+    font-style: italic;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-tab {
+    background: none;
+    border: none;
+    color: var(--steam);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .nav-tab:hover { color: var(--cream); background: rgba(255,255,255,0.06); }
+  .nav-tab.active { color: var(--latte); background: rgba(196,149,106,0.12); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--espresso);
+    padding: 80px 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 40px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.05;
+    max-width: 700px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--latte);
+  }
+
+  .hero-subtitle {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--steam);
+    max-width: 480px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--latte);
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steam);
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; padding: 56px 48px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; animation: fadeUp 0.4s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--steam);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--espresso);
+    line-height: 1.1;
+  }
+
+  /* ── BRAND GUIDE ── */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .brand-card {
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .brand-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(44,26,14,0.08);
+  }
+
+  .brand-card.full { grid-column: 1 / -1; }
+  .brand-card.accent { background: var(--espresso); color: var(--cream); }
+  .brand-card.accent .brand-card-title { color: var(--latte); }
+  .brand-card.accent .brand-card-body { color: var(--steam); }
+
+  .brand-card-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--parchment);
+    position: absolute;
+    top: -8px;
+    right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .brand-card.accent .brand-card-number { color: rgba(196,149,106,0.15); }
+
+  .brand-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coffee);
+    margin-bottom: 16px;
+  }
+
+  .brand-card-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--espresso);
+  }
+
+  /* TONE TABLE */
+  .tone-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+
+  .tone-table th {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--latte);
+  }
+
+  .tone-table th:first-child { color: var(--sage); }
+  .tone-table th:last-child { color: var(--coffee); }
+
+  .tone-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--parchment);
+    vertical-align: top;
+  }
+
+  .tone-table tr:last-child td { border-bottom: none; }
+  .tone-table td:first-child { color: var(--sage); font-style: italic; }
+  .tone-table td:last-child { color: var(--coffee); text-decoration: line-through; opacity: 0.6; font-size: 12px; }
+
+  /* PILLARS */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .pillar {
+    background: var(--parchment);
+    border-radius: 10px;
+    padding: 20px;
+    border-top: 3px solid var(--latte);
+  }
+
+  .pillar-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--espresso);
+    margin-bottom: 8px;
+  }
+
+  .pillar-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--coffee);
+    margin-bottom: 10px;
+  }
+
+  .pillar-goal {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--latte);
+  }
+
+  /* HASHTAGS */
+  .hashtag-clusters {
+    display: flex;
+    gap: 24px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hashtag-cluster { flex: 1; min-width: 180px; }
+
+  .cluster-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 10px;
+  }
+
+  .hashtag-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .hashtag-tag {
+    background: var(--parchment);
+    border: 1px solid var(--steam);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--coffee);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .hashtag-tag:hover { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+
+  /* AVOID LIST */
+  .avoid-list { list-style: none; margin-top: 8px; }
+  .avoid-item {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(196,149,106,0.2);
+    align-items: flex-start;
+  }
+  .avoid-item:last-child { border-bottom: none; }
+  .avoid-x {
+    width: 20px;
+    height: 20px;
+    background: var(--coffee);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 10px;
+    color: var(--cream);
+    font-weight: 600;
+  }
+  .avoid-text { font-size: 13px; line-height: 1.6; color: var(--cream); }
+  .avoid-text strong { color: var(--latte); display: block; margin-bottom: 2px; }
+
+  /* ── CALENDAR ── */
+  .calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .week-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 8px;
+    padding: 8px 16px;
+  }
+
+  .week-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--coffee);
+    font-size: 18px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.15s;
+    line-height: 1;
+  }
+
+  .week-btn:hover { background: var(--parchment); }
+
+  .week-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--espresso);
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .filter-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-pill {
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--coffee);
+    transition: all 0.15s;
+  }
+
+  .filter-pill.active,
+  .filter-pill:hover {
+    background: var(--espresso);
+    color: var(--cream);
+    border-color: var(--espresso);
+  }
+
+  /* CALENDAR GRID */
+  .calendar-week {
+    display: none;
+  }
+
+  .calendar-week.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    animation: fadeUp 0.35s ease;
+  }
+
+  .post-card {
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(44,26,14,0.1);
+  }
+
+  .post-card-header {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--parchment);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .post-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--espresso);
+  }
+
+  .post-day {
+    font-size: 11px;
+    color: var(--coffee);
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .post-pillar-badge {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--parchment);
+    color: var(--coffee);
+    white-space: nowrap;
+  }
+
+  .post-pillar-badge.craft { background: #E8D5C0; color: #6B3F1F; }
+  .post-pillar-badge.ritual { background: #D4E0CC; color: #4A5E3A; }
+  .post-pillar-badge.community { background: #D0D8E8; color: #3A4A6B; }
+  .post-pillar-badge.welcome { background: #E8D0D8; color: #6B3A4A; }
+
+  .post-card-body { padding: 16px 20px; }
+
+  .post-format {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 10px;
+  }
+
+  .post-hooks {
+    margin-bottom: 12px;
+  }
+
+  .post-hook-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steam);
+    margin-bottom: 6px;
+  }
+
+  .post-hook-option {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    align-items: flex-start;
+  }
+
+  .hook-num {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--latte);
+    background: var(--parchment);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .hook-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--espresso);
+    line-height: 1.4;
+  }
+
+  .post-caption-preview {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--coffee);
+    border-left: 2px solid var(--latte);
+    padding-left: 12px;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-card-footer {
+    padding: 12px 20px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .post-time {
+    font-size: 11px;
+    color: var(--steam);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .post-time::before { content: '○'; font-size: 8px; }
+
+  .post-expand-btn {
+    background: var(--espresso);
+    color: var(--cream);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.05em;
+    transition: background 0.15s;
+  }
+
+  .post-expand-btn:hover { background: var(--coffee); }
+
+  /* SPECIAL BADGE */
+  .special-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(135deg, var(--latte), var(--coffee));
+    color: var(--cream);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+
+  /* ── MONTHLY BRIEF ── */
+  .brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .brief-card {
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .brief-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--espresso);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--parchment);
+  }
+
+  .brief-input-group { margin-bottom: 16px; }
+
+  .brief-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 6px;
+  }
+
+  .brief-input,
+  .brief-textarea {
+    width: 100%;
+    background: var(--cream);
+    border: 1px solid var(--steam);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--espresso);
+    transition: border-color 0.15s;
+    outline: none;
+    resize: none;
+  }
+
+  .brief-input:focus,
+  .brief-textarea:focus { border-color: var(--latte); }
+
+  .brief-textarea { min-height: 80px; line-height: 1.6; }
+
+  .brief-generate-btn {
+    width: 100%;
+    background: var(--espresso);
+    color: var(--cream);
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .brief-generate-btn:hover { background: var(--coffee); transform: translateY(-1px); }
+  .brief-generate-btn:active { transform: translateY(0); }
+
+  /* EVENT TAGS */
+  .event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .event-tag {
+    background: var(--parchment);
+    border: 1px solid var(--steam);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--coffee);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .event-tag.selected { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+  .event-tag .tag-x { font-size: 10px; opacity: 0.6; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,18,8,0.7);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    background: var(--mist);
+    border-radius: 16px;
+    max-width: 580px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    background: var(--espresso);
+    padding: 24px 28px;
+    border-radius: 16px 16px 0 0;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .modal-date {
+    font-size: 12px;
+    color: var(--latte);
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--steam);
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    margin-top: -2px;
+  }
+
+  .modal-body { padding: 28px; }
+
+  .modal-section { margin-bottom: 24px; }
+
+  .modal-section-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 10px;
+  }
+
+  .modal-hooks { display: flex; flex-direction: column; gap: 8px; margin-bottom: 0; }
+
+  .modal-hook {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 14px;
+    background: var(--cream);
+    border-radius: 8px;
+    border: 1px solid var(--parchment);
+  }
+
+  .modal-hook .hook-num { width: 22px; height: 22px; font-size: 11px; flex-shrink: 0; }
+
+  .modal-hook .hook-text { font-size: 14px; }
+
+  .modal-caption {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--espresso);
+    background: var(--cream);
+    border: 1px solid var(--parchment);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .modal-cta {
+    background: var(--parchment);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--coffee);
+    font-style: italic;
+  }
+
+  .modal-visual {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--coffee);
+    padding: 12px 16px;
+    background: var(--cream);
+    border-left: 3px solid var(--sage);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .modal-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .modal-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .modal-meta-val {
+    font-size: 13px;
+    color: var(--espresso);
+    font-weight: 500;
+  }
+
+  /* COPY BTN */
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--espresso);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.15s;
+  }
+
+  .copy-btn:hover { background: var(--coffee); }
+
+  /* HOOK SELECTABLE */
+  .modal-hook {
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1.5px solid transparent;
+  }
+
+  .modal-hook:hover {
+    border-color: var(--latte);
+    background: var(--parchment);
+  }
+
+  .modal-hook.selected {
+    border-color: var(--espresso);
+    background: var(--espresso);
+  }
+
+  .modal-hook.selected .hook-num {
+    background: var(--latte);
+    color: var(--espresso);
+  }
+
+  .modal-hook.selected .hook-text {
+    color: var(--cream);
+  }
+
+  .hook-select-hint {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  /* COMPOSED POST BLOCK */
+  .composed-block {
+    display: none;
+    margin-top: 20px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .composed-block.visible { display: block; }
+
+  .composed-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 10px;
+  }
+
+  .composed-textarea {
+    width: 100%;
+    background: var(--espresso);
+    color: var(--cream);
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.9;
+    resize: none;
+    outline: none;
+    min-height: 160px;
+    letter-spacing: 0.01em;
+  }
+
+  .composed-copy-btn {
+    width: 100%;
+    background: var(--latte);
+    color: var(--espresso);
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.15s;
+  }
+
+  .composed-copy-btn:hover { background: var(--cream); }
+  .composed-copy-btn.copied { background: var(--sage); color: var(--cream); }
+
+  /* MINI CALENDAR POPUP */
+  .cal-popup-wrap {
+    position: relative;
+  }
+
+  .cal-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--coffee);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+
+  .cal-toggle-btn:hover { background: var(--parchment); border-color: var(--latte); }
+  .cal-toggle-btn.open { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+
+  .cal-toggle-btn svg { flex-shrink: 0; }
+
+  .mini-cal-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 150;
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-radius: 14px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 16px 48px rgba(44,26,14,0.18);
+    animation: fadeUp 0.2s ease;
+  }
+
+  .mini-cal-popup.open { display: block; }
+
+  .mini-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .mini-cal-month {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--espresso);
+  }
+
+  .mini-cal-nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .mini-cal-nav-btn {
+    background: none;
+    border: 1px solid var(--parchment);
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    color: var(--coffee);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    line-height: 1;
+  }
+
+  .mini-cal-nav-btn:hover { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+
+  .mini-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .mini-cal-dow {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steam);
+    text-align: center;
+    padding: 4px 0 8px;
+  }
+
+  .mini-cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--coffee);
+    border-radius: 6px;
+    cursor: default;
+    position: relative;
+    transition: all 0.12s;
+  }
+
+  .mini-cal-day.empty { cursor: default; }
+
+  .mini-cal-day.has-post {
+    background: var(--espresso);
+    color: var(--cream);
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .mini-cal-day.has-post:hover {
+    background: var(--coffee);
+    transform: scale(1.08);
+  }
+
+  .mini-cal-day.has-post::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--latte);
+    border-radius: 50%;
+  }
+
+  .mini-cal-day.today {
+    border: 1.5px solid var(--latte);
+  }
+
+  .mini-cal-day.other-month {
+    color: var(--steam);
+    opacity: 0.4;
+  }
+
+  .mini-cal-legend {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--parchment);
+  }
+
+  .mini-cal-legend-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--espresso);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .mini-cal-legend-text {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steam);
+  }
+
+  .mini-cal-post-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--espresso);
+    color: var(--cream);
+    font-size: 10px;
+    white-space: nowrap;
+    padding: 5px 9px;
+    border-radius: 6px;
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .mini-cal-day.has-post:hover .mini-cal-post-tooltip { display: block; }
+
+  /* ── INSTRUCTIONS PAGE ── */
+  .instr-hero {
+    background: var(--espresso);
+    border-radius: 14px;
+    padding: 40px 44px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .instr-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 180px; height: 100%;
+    background: linear-gradient(to left, rgba(196,149,106,0.08), transparent);
+    pointer-events: none;
+  }
+
+  .instr-hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 12px;
+  }
+
+  .instr-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .instr-hero-title em { color: var(--latte); font-style: italic; }
+
+  .instr-hero-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--steam);
+    max-width: 600px;
+  }
+
+  .instr-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 40px;
+  }
+
+  .instr-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 24px;
+    position: relative;
+  }
+
+  .instr-step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .instr-step-num {
+    width: 44px;
+    height: 44px;
+    background: var(--espresso);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--latte);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .instr-step-line {
+    width: 2px;
+    flex: 1;
+    background: var(--parchment);
+    min-height: 32px;
+    margin: 4px 0;
+  }
+
+  .instr-step-right {
+    padding: 8px 0 40px;
+  }
+
+  .instr-step-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 6px;
+  }
+
+  .instr-step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--espresso);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  .instr-step-body {
+    font-size: 13.5px;
+    line-height: 1.78;
+    color: var(--coffee);
+    margin-bottom: 14px;
+  }
+
+  .instr-prompt-block {
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-left: 3px solid var(--latte);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+    margin-top: 12px;
+  }
+
+  .instr-prompt-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--latte);
+    margin-bottom: 10px;
+  }
+
+  .instr-prompt-text {
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: var(--espresso);
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+    user-select: all;
+  }
+
+  .instr-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--espresso);
+    color: var(--cream);
+    border: none;
+    border-radius: 7px;
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.15s;
+  }
+
+  .instr-copy-btn:hover { background: var(--coffee); }
+  .instr-copy-btn.copied { background: var(--sage); }
+
+  .instr-tip {
+    background: #EEF2EB;
+    border-left: 3px solid var(--sage);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--coffee);
+  }
+
+  .instr-tip strong { color: var(--sage); font-weight: 500; }
+
+  .instr-warn {
+    background: #F7EEE8;
+    border-left: 3px solid #B85042;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--coffee);
+  }
+
+  .instr-warn strong { color: #B85042; font-weight: 500; }
+
+  .instr-q-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    margin-top: 10px;
+  }
+
+  .instr-q {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--coffee);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .instr-q-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: var(--latte);
+    font-style: italic;
+    flex-shrink: 0;
+    width: 18px;
+  }
+
+  .instr-deliverables {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .instr-deliverable {
+    background: var(--mist);
+    border: 1px solid var(--parchment);
+    border-top: 3px solid var(--latte);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+
+  .instr-deliverable-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: var(--latte);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+
+  .instr-deliverable-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--espresso);
+    margin-bottom: 8px;
+  }
+
+  .instr-deliverable-body {
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--coffee);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--parchment); }
+  ::-webkit-scrollbar-thumb { background: var(--steam); border-radius: 3px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 48px 20px 48px; }
+    .page { padding: 40px 20px; }
+    .brand-grid { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .brief-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">The Daily <span>/ Wellesley</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('brand')">Brand Guide</button>
+    <button class="nav-tab" onclick="showPage('calendar')">Content Calendar</button>
+    <button class="nav-tab" onclick="showPage('brief')">Monthly Brief</button>
+    <button class="nav-tab" onclick="showPage('instructions')">How To Build This</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Brand & Content System</div>
+  <h1 class="hero-title">Your brand.<br><em>Finally on paper.</em></h1>
+  <p class="hero-subtitle">One document. Four weeks of content. Five minutes a month. Built for the business that already knows who it is — and just needs the words.</p>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="hero-stat-num">500</span>
+      <span class="hero-stat-label">Customers / Week</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">4</span>
+      <span class="hero-stat-label">Content Pillars</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">16</span>
+      <span class="hero-stat-label">Posts / Month</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- BRAND GUIDE PAGE -->
+<!-- ══════════════════════════════════════ -->
+<div class="page active" id="page-brand">
+
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Section 01</div>
+      <div class="section-title">Brand Guide</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY + CUSTOMER -->
+  <div class="brand-grid">
+    <div class="brand-card">
+      <div class="brand-card-number">01</div>
+      <div class="brand-card-title">Brand Summary</div>
+      <div class="brand-card-body">We are a neighborhood coffee shop rooted in Wellesley, MA, built on the belief that a great cup of coffee should feel like a pause, not a pit stop. We serve a community of locals who value craft, consistency, and the rare feeling of being known by name. What sets us apart isn't just what's in the cup — it's the fact that walking in feels like coming home.</div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-card-number">02</div>
+      <div class="brand-card-title">Ideal Customer</div>
+      <div class="brand-card-body">She's 35–52, lives within a few miles, and her mornings have a lot riding on them. She's not chasing trends — she's chasing comfort and quality. She already knows what she likes and she's loyal to the places that treat her like a regular before she's earned the title. Once she finds her place, she comes back every single week.</div>
+    </div>
+  </div>
+
+  <!-- VOICE TABLE -->
+  <div class="brand-card full" style="margin-bottom: 24px;">
+    <div class="brand-card-number">03</div>
+    <div class="brand-card-title">Voice & Tone</div>
+    <table class="tone-table">
+      <thead>
+        <tr>
+          <th>✓ We sound like this</th>
+          <th>✗ Not like this</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>"Still here. Still the same corner."</td><td>"Your daily caffeine fix awaits!"</td></tr>
+        <tr><td>"We changed one thing on the menu. It took three months to get right."</td><td>"Exciting NEW item just dropped 🎉"</td></tr>
+        <tr><td>"Come in when you need somewhere to be."</td><td>"The perfect spot for coffee lovers!"</td></tr>
+        <tr><td>"The line moves. The coffee doesn't rush."</td><td>"Fast service, great prices!"</td></tr>
+        <tr><td>"We've been on Washington Street for four years. We plan to stay."</td><td>"Thank you for your continued support 🙏"</td></tr>
+        <tr><td>"Order what you always order. We'll remember it either way."</td><td>"So many options for every taste!"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="brand-card full" style="margin-bottom: 24px; background: var(--parchment);">
+    <div class="brand-card-title">Before / After — Caption Rewrite</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px;">
+      <div>
+        <div style="font-size:10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coffee); margin-bottom: 8px; opacity: 0.6;">Before</div>
+        <div style="font-size:13px; line-height:1.7; color: var(--coffee); text-decoration: line-through; opacity: 0.6;">"Come try our new fall drinks! Pumpkin latte and apple cider options available now. Stop by today!"</div>
+      </div>
+      <div>
+        <div style="font-size:10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-bottom: 8px;">After</div>
+        <div style="font-size:13px; line-height:1.7; color: var(--espresso); font-style: italic; font-family: 'Playfair Display', serif;">"We don't do seasonal for the sake of it. This one earned its place on the menu. It'll be here until it isn't."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT PILLARS -->
+  <div class="brand-card full" style="margin-bottom: 24px;">
+    <div class="brand-card-number">04</div>
+    <div class="brand-card-title">Content Pillars</div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-name">The Craft</div>
+        <div class="pillar-desc">The story behind how we make what we make — sourcing, technique, seasonal ingredients, the details most shops skip.</div>
+        <div class="pillar-goal">Goal: Build trust</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-name">The Morning Ritual</div>
+        <div class="pillar-desc">The feeling of a slow morning, the regulars, the light through the window, the reasons people come back.</div>
+        <div class="pillar-goal">Goal: Emotional connection</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-name">The Community</div>
+        <div class="pillar-desc">Wellesley itself, local events, the people who make up our regulars, neighborhood life.</div>
+        <div class="pillar-goal">Goal: Root us in place</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-name">The Welcome</div>
+        <div class="pillar-desc">Lowering the barrier for new customers — demystifying the menu, answering common questions, making first-timers feel ready.</div>
+        <div class="pillar-goal">Goal: Convert browsers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPTION FORMULA -->
+  <div class="brand-card full" style="margin-bottom: 24px;">
+    <div class="brand-card-number">05</div>
+    <div class="brand-card-title">Caption Formula</div>
+    <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px;">
+      <div style="background: var(--parchment); border-radius: 8px; padding: 16px;">
+        <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color: var(--latte); margin-bottom:8px;">Hook</div>
+        <div style="font-size:13px; line-height:1.6; color: var(--espresso);">One or two short lines. Set a scene, name a feeling, or say something quietly surprising. Never start with the business name.</div>
+      </div>
+      <div style="background: var(--parchment); border-radius: 8px; padding: 16px;">
+        <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color: var(--latte); margin-bottom:8px;">Middle</div>
+        <div style="font-size:13px; line-height:1.6; color: var(--espresso);">One short paragraph. Go one layer deeper — a detail, a story, a truth. Keep it under 4 sentences.</div>
+      </div>
+      <div style="background: var(--parchment); border-radius: 8px; padding: 16px;">
+        <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color: var(--latte); margin-bottom:8px;">Close</div>
+        <div style="font-size:13px; line-height:1.6; color: var(--espresso);">One line call to action. Make it feel like an invitation, not a command.</div>
+      </div>
+    </div>
+    <div style="background: var(--espresso); border-radius: 8px; padding: 20px;">
+      <div style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color: var(--latte); margin-bottom:12px;">Example Caption</div>
+      <div style="font-family:'Playfair Display',serif; font-style:italic; font-size:15px; line-height:1.8; color:var(--cream);">"6:47am.<br><br>This is the part of the day we don't talk about much. The prep. The quiet. The twenty minutes before everything starts.<br><br>We open at 6:30. Come for the quiet version."</div>
+    </div>
+  </div>
+
+  <!-- HASHTAGS -->
+  <div class="brand-card full" style="margin-bottom: 24px;">
+    <div class="brand-card-number">06</div>
+    <div class="brand-card-title">Hashtag Strategy</div>
+    <div class="hashtag-clusters">
+      <div class="hashtag-cluster">
+        <div class="cluster-label">Reach — for visually strong posts</div>
+        <div class="hashtag-tags">
+          <span class="hashtag-tag">#coffeeshop</span>
+          <span class="hashtag-tag">#specialtycoffee</span>
+          <span class="hashtag-tag">#morningroutine</span>
+          <span class="hashtag-tag">#coffeelovers</span>
+          <span class="hashtag-tag">#latteart</span>
+        </div>
+      </div>
+      <div class="hashtag-cluster">
+        <div class="cluster-label">Community — local audience</div>
+        <div class="hashtag-tags">
+          <span class="hashtag-tag">#wellesleyma</span>
+          <span class="hashtag-tag">#wellesleymoms</span>
+          <span class="hashtag-tag">#bostonfoodies</span>
+          <span class="hashtag-tag">#metrowestma</span>
+          <span class="hashtag-tag">#newenglandcoffee</span>
+        </div>
+      </div>
+      <div class="hashtag-cluster">
+        <div class="cluster-label">Brand — build identity</div>
+        <div class="hashtag-tags">
+          <span class="hashtag-tag">#slowmorningclub</span>
+          <span class="hashtag-tag">#wellesleycoffee</span>
+          <span class="hashtag-tag">#morningrituals</span>
+          <span class="hashtag-tag">#coffeeandcommunity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVOID -->
+  <div class="brand-card full accent">
+    <div class="brand-card-number" style="color: rgba(196,149,106,0.1);">07</div>
+    <div class="brand-card-title">What To Avoid</div>
+    <ul class="avoid-list">
+      <li class="avoid-item"><span class="avoid-x">✕</span><div class="avoid-text"><strong>Discount-forward posts</strong>Your best customers come for feeling, not deals. Promotional pricing undercuts the brand you've built.</div></li>
+      <li class="avoid-item"><span class="avoid-x">✕</span><div class="avoid-text"><strong>Generic celebration posts</strong>"Happy Monday!" with a stock image adds noise without adding personality.</div></li>
+      <li class="avoid-item"><span class="avoid-x">✕</span><div class="avoid-text"><strong>Over-explaining the menu</strong>Long ingredient lists read like a manual, not an invitation. Trust the drink to speak.</div></li>
+      <li class="avoid-item"><span class="avoid-x">✕</span><div class="avoid-text"><strong>Trend-chasing</strong>Jumping on audio trends that have nothing to do with a slow morning in Wellesley will confuse your audience.</div></li>
+      <li class="avoid-item"><span class="avoid-x">✕</span><div class="avoid-text"><strong>Apologizing for posting gaps</strong>Never open a post with "we've been quiet lately." Just post. Your audience tracks feelings, not your schedule.</div></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CALENDAR PAGE -->
+<!-- ══════════════════════════════════════ -->
+<div class="page" id="page-calendar">
+
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Section 02</div>
+      <div class="section-title">Content Calendar</div>
+    </div>
+  </div>
+
+  <div class="calendar-controls">
+    <div class="week-nav">
+      <button class="week-btn" onclick="changeWeek(-1)">‹</button>
+      <span class="week-label" id="week-label">Week 1</span>
+      <button class="week-btn" onclick="changeWeek(1)">›</button>
+    </div>
+    <div class="filter-pills">
+      <button class="filter-pill active" onclick="filterPillar(this,'all')">All</button>
+      <button class="filter-pill" onclick="filterPillar(this,'craft')">The Craft</button>
+      <button class="filter-pill" onclick="filterPillar(this,'ritual')">Morning Ritual</button>
+      <button class="filter-pill" onclick="filterPillar(this,'community')">Community</button>
+      <button class="filter-pill" onclick="filterPillar(this,'welcome')">The Welcome</button>
+    </div>
+    <div class="cal-popup-wrap" id="cal-popup-wrap">
+      <button class="cal-toggle-btn" id="cal-toggle-btn" onclick="toggleMiniCal()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="2" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M1 5.5H13" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M4.5 1V3.5M9.5 1V3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        April 2025
+      </button>
+      <div class="mini-cal-popup" id="mini-cal-popup"></div>
+    </div>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="calendar-week active" id="week-1">
+
+    <div class="post-card" data-pillar="ritual" onclick="openModal('w1-mon')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 7</div><div class="post-day">Monday</div></div>
+        <span class="post-pillar-badge ritual">Morning Ritual</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"The shop looks different before anyone arrives."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"There's a version of this place most people never see."</span></div>
+        </div>
+        <div class="post-caption-preview">We've been opening at the same time for four years. The light still surprises us.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Mon 7–9am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="welcome" onclick="openModal('w1-wed')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 9</div><div class="post-day">Wednesday</div></div>
+        <span class="post-pillar-badge welcome">The Welcome</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Carousel — 3 Slides</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"You don't need to know what you want."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"Walk in. We'll figure it out together."</span></div>
+        </div>
+        <div class="post-caption-preview">Most people apologize when they don't know what to order. Don't. That's what we're here for. Tell us what you usually get somewhere else and we'll find you something better.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Wed 11am–1pm</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="community" onclick="openModal('w1-fri')">
+      <div class="post-card-header">
+        <div>
+          <div class="post-date">April 11</div>
+          <div class="post-day">Friday</div>
+          <div class="special-badge">★ Milestone</div>
+        </div>
+        <span class="post-pillar-badge community">Community</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"Five hundred mornings."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"Same seat. Same order. Five hundred times."</span></div>
+        </div>
+        <div class="post-caption-preview">This week a regular came in for the five hundredth time. We didn't make a fuss. We just made their drink. That felt right.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Fri 8–10am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="craft" onclick="openModal('w1-sun')">
+      <div class="post-card-header">
+        <div>
+          <div class="post-date">April 13</div>
+          <div class="post-day">Sunday</div>
+          <div class="special-badge">★ New Menu Item</div>
+        </div>
+        <span class="post-pillar-badge craft">The Craft</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Reel</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"This one took longer than it should have."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"We pulled it off the menu twice before we got it right."</span></div>
+        </div>
+        <div class="post-caption-preview">The honey lavender took four attempts. The first was too floral. The second too sweet. The third was close. The fourth is on the menu now. We don't add things until they're ready.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Sun 9–11am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="calendar-week" id="week-2">
+
+    <div class="post-card" data-pillar="ritual" onclick="openModal('w2-tue')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 15</div><div class="post-day">Tuesday</div></div>
+        <span class="post-pillar-badge ritual">Morning Ritual</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"6:47am."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"Before the first customer. After the first shot."</span></div>
+        </div>
+        <div class="post-caption-preview">This is the part of the day we don't talk about much. The prep. The quiet. The twenty minutes before everything starts. We like it in here.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Tue 6:30–8am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="welcome" onclick="openModal('w2-thu')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 17</div><div class="post-day">Thursday</div></div>
+        <span class="post-pillar-badge welcome">The Welcome</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"The answer is yes."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"We've had oat milk for three years."</span></div>
+        </div>
+        <div class="post-caption-preview">Yes to oat milk. Yes to parking. Yes to sitting as long as you need. The things people hesitate to ask — the answer is almost always yes.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Thu 12–2pm</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="community" onclick="openModal('w2-sat')">
+      <div class="post-card-header">
+        <div>
+          <div class="post-date">April 19</div>
+          <div class="post-day">Saturday</div>
+          <div class="special-badge">★ Spring Break</div>
+        </div>
+        <span class="post-pillar-badge community">Community</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"The crowd shifts this week."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"Slower mornings. We're ready."</span></div>
+        </div>
+        <div class="post-caption-preview">Spring break brings a different pace to the shop. Fewer laptops. More kids at the table. More people with nowhere to be at 9am. We like this version of the week.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Sat 8–10am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="calendar-week" id="week-3">
+
+    <div class="post-card" data-pillar="craft" onclick="openModal('w3-mon')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 21</div><div class="post-day">Monday</div></div>
+        <span class="post-pillar-badge craft">The Craft</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Carousel — 4 Slides</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"It takes four minutes longer."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"People ask us if the pour over is worth it."</span></div>
+        </div>
+        <div class="post-caption-preview">The answer depends on your morning. If you have four minutes — really have them — we'll show you the difference. If you don't, we'll have something else ready. We're not precious about it.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Mon 7–9am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="ritual" onclick="openModal('w3-wed')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 23</div><div class="post-day">Wednesday</div></div>
+        <span class="post-pillar-badge ritual">Morning Ritual</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"April in Wellesley."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"Hot or iced. We're not going to tell you."</span></div>
+        </div>
+        <div class="post-caption-preview">Some mornings feel like winter. Some feel like May. We've stopped predicting it. Both options are ready before you decide.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Wed 8–10am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="community" onclick="openModal('w3-fri')">
+      <div class="post-card-header">
+        <div>
+          <div class="post-date">April 25</div>
+          <div class="post-day">Friday</div>
+          <div class="special-badge">★ Anniversary</div>
+        </div>
+        <span class="post-pillar-badge community">Community</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Reel — Montage</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"Four years on Washington Street."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"We weren't sure Wellesley needed another coffee shop."</span></div>
+        </div>
+        <div class="post-caption-preview">Turns out it didn't need another one. It needed this one. We know the difference now. Thank you for making that clear.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Fri 9–11am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="calendar-week" id="week-4">
+
+    <div class="post-card" data-pillar="welcome" onclick="openModal('w4-tue')">
+      <div class="post-card-header">
+        <div><div class="post-date">April 28</div><div class="post-day">Tuesday</div></div>
+        <span class="post-pillar-badge welcome">The Welcome</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"If you've been meaning to come in."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"This is the nudge."</span></div>
+        </div>
+        <div class="post-caption-preview">You don't need to know the menu. You don't need to know what a cortado is or isn't. You just need to walk through the door. We'll take it from there.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Tue 11am–1pm</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="craft" onclick="openModal('w4-thu')">
+      <div class="post-card-header">
+        <div>
+          <div class="post-date">April 30</div>
+          <div class="post-day">Thursday</div>
+          <div class="special-badge">★ New Item</div>
+        </div>
+        <span class="post-pillar-badge craft">The Craft</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo — Flat Lay</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"Version one was wrong."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"We almost didn't put it on the menu."</span></div>
+        </div>
+        <div class="post-caption-preview">Version one was too floral. Version two too sweet. Version three nearly made it. We pulled it anyway. Version four has been on the menu for two weeks and we're still proud of it.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Thu 7–9am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+    <div class="post-card" data-pillar="ritual" onclick="openModal('w4-sun')">
+      <div class="post-card-header">
+        <div><div class="post-date">May 4</div><div class="post-day">Sunday</div></div>
+        <span class="post-pillar-badge ritual">Morning Ritual</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-format">Single Photo</div>
+        <div class="post-hooks">
+          <div class="post-hook-label">Hook Options</div>
+          <div class="post-hook-option"><span class="hook-num">1</span><span class="hook-text">"No alarm. No agenda."</span></div>
+          <div class="post-hook-option"><span class="hook-num">2</span><span class="hook-text">"Sunday."</span></div>
+        </div>
+        <div class="post-caption-preview">Stay as long as you need. That's the whole point of today.</div>
+      </div>
+      <div class="post-card-footer">
+        <span class="post-time">Sun 8–11am</span>
+        <button class="post-expand-btn">View Full Post</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- MONTHLY BRIEF PAGE -->
+<!-- ══════════════════════════════════════ -->
+<div class="page" id="page-brief">
+
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Section 03</div>
+      <div class="section-title">Monthly Brief</div>
+    </div>
+  </div>
+
+  <p style="font-size: 14px; line-height: 1.8; color: var(--coffee); max-width: 600px; margin-bottom: 40px;">Once a month, sit down and fill this in. Your answers tell the system what's happening in the business — so the content calendar can build itself around what actually matters this month, not generic filler.</p>
+
+  <div class="brief-grid">
+
+    <div class="brief-card">
+      <div class="brief-card-title">What's Happening This Month</div>
+
+      <div class="brief-input-group">
+        <label class="brief-label">New products, services, or menu items</label>
+        <textarea class="brief-textarea" placeholder="e.g. Honey lavender latte launching April 7th. Also adding cold brew on tap."></textarea>
+      </div>
+
+      <div class="brief-input-group">
+        <label class="brief-label">Any client wins, milestones, or stories worth sharing</label>
+        <textarea class="brief-textarea" placeholder="e.g. Regular just hit their 500th visit. Staff member celebrating 2 years with us."></textarea>
+      </div>
+
+      <div class="brief-input-group">
+        <label class="brief-label">Behind the scenes moments or changes</label>
+        <textarea class="brief-textarea" placeholder="e.g. Repainted the back wall, new espresso machine arriving, sourcing from a new farm in Ethiopia."></textarea>
+      </div>
+    </div>
+
+    <div class="brief-card">
+      <div class="brief-card-title">Dates & Promotions</div>
+
+      <div class="brief-input-group">
+        <label class="brief-label">Select upcoming dates to acknowledge</label>
+        <div class="event-tags" id="event-tags">
+          <span class="event-tag" onclick="toggleTag(this)">Easter Weekend</span>
+          <span class="event-tag" onclick="toggleTag(this)">Spring Break</span>
+          <span class="event-tag" onclick="toggleTag(this)">Earth Day (Apr 22)</span>
+          <span class="event-tag" onclick="toggleTag(this)">National Coffee Day</span>
+          <span class="event-tag" onclick="toggleTag(this)">Small Business Week</span>
+          <span class="event-tag" onclick="toggleTag(this)">Mother's Day</span>
+          <span class="event-tag" onclick="toggleTag(this)">Store Anniversary</span>
+          <span class="event-tag" onclick="toggleTag(this)">Local Event</span>
+        </div>
+      </div>
+
+      <div class="brief-input-group" style="margin-top: 16px;">
+        <label class="brief-label">What do you most want to drive action on?</label>
+        <textarea class="brief-textarea" placeholder="e.g. Getting first-time visitors in the door. Promoting our loyalty card — buy 9 get 1 free."></textarea>
+      </div>
+
+      <div class="brief-input-group">
+        <label class="brief-label">Anything to avoid or stay away from this month</label>
+        <input class="brief-input" type="text" placeholder="e.g. Nothing discount-heavy, keeping it warm and seasonal">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="brief-card" style="margin-bottom: 24px;">
+    <div class="brief-card-title">Content Direction</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+      <div class="brief-input-group" style="margin-bottom: 0;">
+        <label class="brief-label">Primary goal this month</label>
+        <select class="brief-input" style="cursor: pointer;">
+          <option>Brand awareness — new faces</option>
+          <option>Convert followers to first visits</option>
+          <option>Loyalty — bring regulars back</option>
+          <option>Promote a specific item</option>
+          <option>Community building</option>
+        </select>
+      </div>
+      <div class="brief-input-group" style="margin-bottom: 0;">
+        <label class="brief-label">Tone this month</label>
+        <select class="brief-input" style="cursor: pointer;">
+          <option>Warm & nostalgic</option>
+          <option>Fresh & seasonal</option>
+          <option>Community-forward</option>
+          <option>Educational & craft-focused</option>
+          <option>Quiet & contemplative</option>
+        </select>
+      </div>
+      <div class="brief-input-group" style="margin-bottom: 0;">
+        <label class="brief-label">Posting frequency</label>
+        <select class="brief-input" style="cursor: pointer;">
+          <option>4x per week</option>
+          <option>3x per week</option>
+          <option>Daily</option>
+          <option>2x per week</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="brief-generate-btn" onclick="generateCalendar()">Generate This Month's Content Calendar →</button>
+
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- INSTRUCTIONS PAGE -->
+<!-- ══════════════════════════════════════ -->
+<div class="page" id="page-instructions">
+
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Section 04</div>
+      <div class="section-title">How To Build This For Your Business</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="instr-hero">
+    <div class="instr-hero-eyebrow">Your Brand & Content System</div>
+    <div class="instr-hero-title">What you're looking at is a demo.<br><em>Here's how to build one for your business.</em></div>
+    <div class="instr-hero-body">This dashboard was built entirely in Claude — no developers, no subscriptions, no design tools. It took two prompts and about 90 minutes. Follow the three steps below and you'll have your own version: your brand voice, your content calendar, your monthly refresh button. After that it takes about five minutes a month.</div>
+  </div>
+
+  <!-- DELIVERABLES -->
+  <div class="instr-deliverables">
+    <div class="instr-deliverable">
+      <div class="instr-deliverable-num">01</div>
+      <div class="instr-deliverable-title">Brand Guide</div>
+      <div class="instr-deliverable-body">Your voice, your customer, your content pillars, your caption formula. Built once from your answers. Permanent and reusable.</div>
+    </div>
+    <div class="instr-deliverable">
+      <div class="instr-deliverable-num">02</div>
+      <div class="instr-deliverable-title">Content Calendar</div>
+      <div class="instr-deliverable-body">16 fully written posts across 4 weeks. Two hook options per post. Click one and your complete caption assembles ready to copy.</div>
+    </div>
+    <div class="instr-deliverable">
+      <div class="instr-deliverable-num">03</div>
+      <div class="instr-deliverable-title">Monthly Refresh</div>
+      <div class="instr-deliverable-body">Answer 4 questions once a month, hit Generate, and a brand new calendar appears — in your voice, around your real business events.</div>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="instr-steps">
+
+    <!-- STEP 1 -->
+    <div class="instr-step">
+      <div class="instr-step-left">
+        <div class="instr-step-num">1</div>
+        <div class="instr-step-line"></div>
+      </div>
+      <div class="instr-step-right">
+        <div class="instr-step-eyebrow">Step 1 of 3  ·  15 minutes</div>
+        <div class="instr-step-title">Fill in the questionnaire</div>
+        <div class="instr-step-body">Answer all 20 questions below in plain language. Be specific — the more honest and concrete your answers, the better everything Claude produces. These answers are the foundation of your entire brand system. Question 10 is the most important: paste in something you've actually written — a caption, an email to a customer, a text. Claude will study it and mirror your voice in everything it creates.</div>
+        <div class="instr-tip"><strong>TIP</strong> — Write in your own words. Plain language works better than polished marketing copy. You are not pitching — you are describing.</div>
+        <div class="instr-q-grid">
+          <div class="instr-q"><span class="instr-q-num">1.</span>What does your business do, and what do you do better than anyone else?</div>
+          <div class="instr-q"><span class="instr-q-num">2.</span>Describe your best customer like a real person — age, lifestyle, what they care about, what problem they bring to you.</div>
+          <div class="instr-q"><span class="instr-q-num">3.</span>What does a customer need to feel or believe before they choose you over somewhere else?</div>
+          <div class="instr-q"><span class="instr-q-num">4.</span>If your brand were a person at a dinner party, how would they talk and carry themselves?</div>
+          <div class="instr-q"><span class="instr-q-num">5.</span>Three words you want to sound like. Three words you never want to sound like.</div>
+          <div class="instr-q"><span class="instr-q-num" style="color:#B85042;font-weight:600;">6.</span><span style="color:var(--espresso);font-weight:500;">Paste your favourite thing you've ever written — a caption, an email, anything. <em style="color:var(--sage);">Most important.</em></span></div>
+          <div class="instr-q"><span class="instr-q-num">7.</span>The three topics your business naturally gravitates toward.</div>
+          <div class="instr-q"><span class="instr-q-num">8.</span>What do you wish more people understood about what you do or your industry?</div>
+          <div class="instr-q"><span class="instr-q-num">9.</span>What has performed best in your content so far? What has completely flopped?</div>
+          <div class="instr-q"><span class="instr-q-num">10.</span>The one thing you want every person who sees your content to feel or think.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="instr-step">
+      <div class="instr-step-left">
+        <div class="instr-step-num">2</div>
+        <div class="instr-step-line"></div>
+      </div>
+      <div class="instr-step-right">
+        <div class="instr-step-eyebrow">Step 2 of 3  ·  5 minutes to set up, then Claude works</div>
+        <div class="instr-step-title">Run Prompt 1 — get your Brand Guide</div>
+        <div class="instr-step-body">Open <strong>claude.ai</strong> and start a new conversation. Copy the entire prompt below. Paste your answers from Step 1 at the bottom, replacing each [answer]. Send it to Claude. Save everything Claude sends back — you will paste it into Prompt 2.</div>
+        <div class="instr-tip"><strong>TIP</strong> — If any section feels off or too generic, reply: "The voice section doesn't feel like us. We're more [description]. Can you rewrite it?" Claude will adjust.</div>
+        <div class="instr-prompt-block">
+          <div class="instr-prompt-label">Prompt 1 — Brand Guide  ·  Select all and copy</div>
+          <div class="instr-prompt-text" id="prompt1-text">You are a senior brand strategist at a luxury marketing agency. Turn the owner's answers below into a complete Brand Guide. Be ruthlessly specific — every line must belong to this business only. If it could appear in a competitor's guide, delete it and rewrite it. Use the owner's own words wherever possible. You are documenting their voice, not inventing one.
+
+INDUSTRY CONTEXT — use your knowledge of this industry as background only: know what competitors typically say so this brand says something different, know which formats perform well so your recommendations are strategic, know the common clichés so the voice section explicitly rejects them. The brand's answers override everything.
+
+Produce these sections in full:
+
+BRAND SUMMARY — 3 sentences. Who they are, who they serve, what makes them irreplaceable. No clichés.
+
+IDEAL CUSTOMER — 1 paragraph. A real person: age, lifestyle, daily habits, emotional outcome they want, what they need to feel before they commit.
+
+VOICE & TONE — (a) 5 tone descriptors specific to this brand, each contrasting with how competitors typically sound. (b) "We sound like this / not like this" table — 6 rows of real phrases, not descriptions. Let the "not like this" column reflect common industry language. (c) Before/after caption rewrite in this brand's voice.
+
+CONTENT PILLARS — 4 pillars from the owner's answers. For each: name (2–4 words in the brand's voice), 1-sentence description, business goal, 2 specific post ideas to shoot tomorrow. Let current format trends in this industry inform format suggestions, not topics.
+
+CAPTION FORMULA — hook / middle / close with brand-specific guidance. Include 1 full example caption.
+
+PLATFORM NOTES — for each platform, 2–3 practical sentences on tone, format, and cadence drawing on current algorithm behaviour.
+
+HASHTAG STRATEGY — 3 clusters (reach, community, brand/niche), 5 hashtags each. Ground reach cluster in what is currently performing.
+
+WHAT TO AVOID — 5 mistakes specific to this brand. At least 2 must name patterns currently common in their industry that make brands invisible.
+
+MY ANSWERS:
+
+ABOUT MY BUSINESS & CUSTOMER
+1. What my business does and what I do better than anyone else: [answer]
+2. My best customer — age, lifestyle, what they care about, what problem they bring to me: [answer]
+3. What a customer needs to feel or believe before they choose me over somewhere else: [answer]
+
+MY VOICE
+4. If my brand were a person at a dinner party, how they'd talk and carry themselves: [answer]
+5. Three words I want to sound like. Three words I never want to sound like: [answer]
+6. My favourite thing I've ever written — a caption, email, text, anything: [answer — most important input. Study the rhythm, vocabulary, and tone. Mirror it in everything you produce.]
+
+MY CONTENT & GOALS
+7. The three topics my business naturally gravitates toward: [answer]
+8. What I wish more people understood about what I do or my industry: [answer]
+9. What has performed best in my content so far and what has completely flopped: [answer]
+10. The one thing I want every person who sees my content to feel or think: [answer]</div>
+          <button class="instr-copy-btn" onclick="copyPrompt('prompt1-text', this)">Copy Prompt 1</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="instr-step">
+      <div class="instr-step-left">
+        <div class="instr-step-num">3</div>
+        <div class="instr-step-line" style="background: transparent;"></div>
+      </div>
+      <div class="instr-step-right">
+        <div class="instr-step-eyebrow">Step 3 of 3  ·  5 minutes to set up, then Claude builds</div>
+        <div class="instr-step-title">Run Prompt 2 — build your interactive site</div>
+        <div class="instr-step-body">Start a new Claude conversation. Copy the entire prompt below. Paste your complete Brand Guide from Step 2 where indicated, and fill in the four Monthly Brief questions about this month. Send it to Claude. Claude will produce a single HTML file — save it to your desktop or Google Drive and open it in any browser.</div>
+        <div class="instr-tip"><strong>TIP</strong> — Every month after that: open your site, go to the Monthly Brief tab, answer 4 questions, hit Generate. Your new calendar appears automatically. The whole thing takes about five minutes.</div>
+        <div class="instr-warn"><strong>WATCH OUT</strong> — The Generate button uses the Claude API and requires a claude.ai account. If it doesn't work, re-run Prompt 2 with updated Monthly Brief answers as a fallback — it takes the same 5 minutes.</div>
+        <div class="instr-prompt-block">
+          <div class="instr-prompt-label">Prompt 2 — Interactive Site  ·  Select all and copy</div>
+          <div class="instr-prompt-text" id="prompt2-text">You are a senior brand strategist, social media copywriter, and web developer. Using the Brand Guide and Monthly Brief below, build me a complete interactive single-file HTML website I can open in any browser.
+
+INDUSTRY CONTEXT — use your knowledge of this industry as strategic background: which formats are currently performing on Instagram, what seasonal moments matter this month, what purchase triggers and trust signals are specific to this category, and what the best-performing accounts are doing so you can do something different. Use this to make the calendar strategically smart. Never let it make the captions generic.
+
+SPECIFICITY STANDARD — every caption, hook, and CTA must belong to this brand only. If it could run on a competitor's feed unchanged, rewrite it. The Brand Guide is the creative brief. Use the owner's language throughout.
+
+CAPTION RULES: Hook stops a scroll — never open with the business name or a greeting. Middle goes one layer deeper in under 4 sentences. CTA is a quiet invitation not a command. No puns, hype language, or filler. Short is almost always better. Read each caption aloud — if it sounds generated, rewrite it.
+
+TAB 1 — BRAND GUIDE
+Display the full Brand Guide with all sections clearly labelled: Brand Summary, Ideal Customer, Voice & Tone (with table and before/after), Content Pillars, Caption Formula, Platform Notes, Hashtag Strategy (clickable tags), What To Avoid.
+
+TAB 2 — CONTENT CALENDAR
+4-week Instagram calendar, 3–4 posts per week. Format variety should reflect what is currently performing in this industry. For every post: date, pillar, format, 2 selectable hook options, full caption, on-image text, CTA, photo direction, best posting time. Display as clickable cards. When a hook is selected the full post assembles into one ready-to-copy text block with a copy button. Include week navigation, pillar filters, and a pop-up monthly calendar colour-coded by pillar. Posts must directly support the business goal. Monthly Brief events woven in naturally, not announced.
+
+TAB 3 — MONTHLY BRIEF
+Form with 4 fields: what happened this month / upcoming dates / what to drive action on / what to avoid. A Generate Next Month button that calls the Claude API to regenerate the calendar with new posts using the same Brand Guide and voice, applying industry awareness to the new month's context.
+
+TAB 4 — HOW TO BUILD THIS
+An instructions tab explaining exactly how the owner built this dashboard and how they can rebuild it for a different month or update it. Include all prompts as selectable, copyable text.
+
+DESIGN: Single HTML file, Google Fonts only, warm cream and dark brown palette, serif display font, mobile-friendly, post cards colour-coded by pillar, smooth transitions.
+
+BRAND GUIDE:
+[paste your complete Brand Guide output from Step 2 here — every section, word for word]
+
+MONTHLY BRIEF:
+What happened in my business this month: [answer]
+Upcoming dates or events worth acknowledging: [answer]
+What I most want to drive action on: [answer]
+Anything to avoid this month: [answer]</div>
+          <button class="instr-copy-btn" onclick="copyPrompt('prompt2-text', this)">Copy Prompt 2</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end steps -->
+
+  <!-- AFTER -->
+  <div style="background: var(--espresso); border-radius: 12px; padding: 32px 36px; margin-bottom: 16px;">
+    <div style="font-family: 'Playfair Display', serif; font-size: 14px; font-style: italic; color: var(--latte); margin-bottom: 14px;">After your first session</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--steam); margin-bottom: 8px;">Weekly</div>
+        <div style="font-size: 12.5px; line-height: 1.75; color: var(--steam);">Sunday — plan the week, note photo direction.<br>Mon/Tue — shoot content in batches.<br>Wednesday — open each post card, select hook, copy caption, schedule in Buffer or Meta Business Suite.</div>
+      </div>
+      <div>
+        <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--steam); margin-bottom: 8px;">Monthly</div>
+        <div style="font-size: 12.5px; line-height: 1.75; color: var(--steam);">Go to the Monthly Brief tab. Answer 4 questions. Hit Generate. Your new calendar appears — all in your voice, built around what's actually happening in your business. About five minutes.</div>
+      </div>
+    </div>
+    <div style="margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(196,149,106,0.2);">
+      <div style="font-family: 'Playfair Display', serif; font-size: 15px; font-style: italic; color: var(--latte);">Three prompts. One sitting. A system you keep forever.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- MODAL -->
+<!-- ══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-date" id="modal-date"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+function copyPrompt(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = id.includes('1') ? 'Copy Prompt 1' : 'Copy Prompt 2';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+// ── PAGE NAVIGATION ──
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── WEEK NAVIGATION ──
+let currentWeek = 1;
+function changeWeek(dir) {
+  const newWeek = currentWeek + dir;
+  if (newWeek < 1 || newWeek > 4) return;
+  document.getElementById('week-' + currentWeek).classList.remove('active');
+  currentWeek = newWeek;
+  document.getElementById('week-' + currentWeek).classList.add('active');
+  document.getElementById('week-label').textContent = 'Week ' + currentWeek;
+  applyFilter();
+}
+
+// ── PILLAR FILTER ──
+let activeFilter = 'all';
+function filterPillar(btn, pillar) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = pillar;
+  applyFilter();
+}
+
+function applyFilter() {
+  const cards = document.querySelectorAll('#week-' + currentWeek + ' .post-card');
+  cards.forEach(card => {
+    if (activeFilter === 'all' || card.dataset.pillar === activeFilter) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ── EVENT TAGS ──
+function toggleTag(el) {
+  el.classList.toggle('selected');
+}
+
+// ── MODAL DATA ──
+const posts = {
+  'w1-mon': {
+    title: 'Morning Ritual — Before Anyone Arrives',
+    date: 'Monday, April 7 · Best time: 7–9am',
+    format: 'Single Photo',
+    hooks: [
+      '"The shop looks different before anyone arrives."',
+      '"There\'s a version of this place most people never see."'
+    ],
+    caption: 'We\'ve been opening at the same time for four years. The light still surprises us.',
+    onimage: '6:30am. Washington Street.',
+    cta: 'Washington Street. Monday through Sunday.',
+    visual: 'Wide shot of the empty shop interior at dawn — chairs still tucked in, espresso machine catching the first light through the window. No people. Shot from the doorway looking in.',
+    time: 'Monday 7–9am'
+  },
+  'w1-wed': {
+    title: 'The Welcome — Walk In',
+    date: 'Wednesday, April 9 · Best time: 11am–1pm',
+    format: 'Carousel — 3 Slides',
+    hooks: [
+      '"You don\'t need to know what you want."',
+      '"Walk in. We\'ll figure it out together."'
+    ],
+    caption: 'Most people apologize when they don\'t know what to order. Don\'t. That\'s what we\'re here for. Tell us what you usually get somewhere else and we\'ll find you something better.',
+    onimage: 'First time? Just tell us what you usually drink.',
+    cta: 'Walk in. First visit — tell us at the counter.',
+    visual: 'Barista\'s hands mid-pour or mid-conversation across the counter — warm, unhurried, close crop. No face needed. The gesture is enough.',
+    time: 'Wednesday 11am–1pm'
+  },
+  'w1-fri': {
+    title: 'Community — Five Hundred Mornings',
+    date: 'Friday, April 11 · Best time: 8–10am',
+    format: 'Single Photo',
+    hooks: [
+      '"Five hundred mornings."',
+      '"Same seat. Same order. Five hundred times."'
+    ],
+    caption: 'This week a regular came in for the five hundredth time. We didn\'t make a fuss. We just made their drink. That felt right.',
+    onimage: '500.',
+    cta: 'You know who you are.',
+    visual: 'Their usual drink sitting on their usual table — corner seat, natural light, no one in frame. The absence of the person makes it more intimate, not less.',
+    time: 'Friday 8–10am'
+  },
+  'w1-sun': {
+    title: 'The Craft — Honey Lavender',
+    date: 'Sunday, April 13 · Best time: 9–11am',
+    format: 'Reel',
+    hooks: [
+      '"This one took longer than it should have."',
+      '"We pulled it off the menu twice before we got it right."'
+    ],
+    caption: 'The honey lavender took four attempts. The first was too floral. The second too sweet. The third was close. The fourth is on the menu now. We don\'t add things until they\'re ready.',
+    onimage: 'Honey lavender. Now on the menu.',
+    cta: 'Try it while it\'s here.',
+    visual: 'Overhead flat lay — the finished drink centered, a single sprig of dried lavender resting beside it, a small dish of honey off to the side. Clean linen or marble surface. Nothing extra.',
+    time: 'Sunday 9–11am'
+  },
+  'w2-tue': {
+    title: 'Morning Ritual — Before the Doors Open',
+    date: 'Tuesday, April 15 · Best time: 6:30–8am',
+    format: 'Single Photo',
+    hooks: [
+      '"6:47am."',
+      '"Before the first customer. After the first shot."'
+    ],
+    caption: 'This is the part of the day we don\'t talk about much. The prep. The quiet. The twenty minutes before everything starts. We like it in here.',
+    onimage: 'Before the doors open.',
+    cta: 'We open at 6:30. Come for the quiet.',
+    visual: 'Extreme close-up of espresso falling into a small cup — steam rising, dark background. Or: a wide shot of one staff member setting up alone, back to camera, warm light.',
+    time: 'Tuesday 6:30–8am'
+  },
+  'w2-thu': {
+    title: 'The Welcome — The Answer Is Yes',
+    date: 'Thursday, April 17 · Best time: 12–2pm',
+    format: 'Single Photo',
+    hooks: [
+      '"The answer is yes."',
+      '"We\'ve had oat milk for three years."'
+    ],
+    caption: 'Yes to oat milk. Yes to parking. Yes to sitting as long as you need. The things people hesitate to ask — the answer is almost always yes.',
+    onimage: 'Yes, we have oat milk.',
+    cta: 'Any other questions — ask at the counter.',
+    visual: 'Iced oat milk latte being set down on the counter — condensation on the glass, warm afternoon light, clean marble or wood surface. Simple, unhurried.',
+    time: 'Thursday 12–2pm'
+  },
+  'w2-sat': {
+    title: 'Community — Spring Break',
+    date: 'Saturday, April 19 · Best time: 8–10am',
+    format: 'Single Photo',
+    hooks: [
+      '"The crowd shifts this week."',
+      '"Slower mornings. We\'re ready."'
+    ],
+    caption: 'Spring break brings a different pace to the shop. Fewer laptops. More kids at the table. More people with nowhere to be at 9am. We like this version of the week.',
+    onimage: 'Bring whoever.',
+    cta: 'Come in with whoever you\'ve got.',
+    visual: 'A table with a latte and a hot chocolate side by side — two different-sized cups, maybe a small hand visible reaching for one. Loose, candid, not staged.',
+    time: 'Saturday 8–10am'
+  },
+  'w3-mon': {
+    title: 'The Craft — The Pour Over',
+    date: 'Monday, April 21 · Best time: 7–9am',
+    format: 'Carousel — 4 Slides',
+    hooks: [
+      '"It takes four minutes longer."',
+      '"People ask us if the pour over is worth it."'
+    ],
+    caption: 'The answer depends on your morning. If you have four minutes — really have them — we\'ll show you the difference. If you don\'t, we\'ll have something else ready. We\'re not precious about it.',
+    onimage: 'Slide 1: The pour over. · Slide 4: Four minutes. Worth asking for.',
+    cta: 'Ask us to walk you through it next time you\'re in.',
+    visual: 'Carousel — Slide 1: the whole setup from above. Slide 2: water being poured in a slow controlled arc. Slide 3: the finished cup, steam just visible. Slide 4: the cup in someone\'s hands — no face, just hands and morning light.',
+    time: 'Monday 7–9am'
+  },
+  'w3-wed': {
+    title: 'Morning Ritual — April in Wellesley',
+    date: 'Wednesday, April 23 · Best time: 8–10am',
+    format: 'Single Photo',
+    hooks: [
+      '"April in Wellesley."',
+      '"Hot or iced. We\'re not going to tell you."'
+    ],
+    caption: 'Some mornings feel like winter. Some feel like May. We\'ve stopped predicting it. Both options are ready before you decide.',
+    onimage: 'Hot. Iced. Both ready.',
+    cta: 'Come in either way.',
+    visual: 'Two drinks side by side on the counter — one hot, one iced. Equal billing. Natural window light. The split does the work.',
+    time: 'Wednesday 8–10am'
+  },
+  'w3-fri': {
+    title: 'Community — Four Years',
+    date: 'Friday, April 25 · Best time: 9–11am',
+    format: 'Reel — Montage',
+    hooks: [
+      '"Four years on Washington Street."',
+      '"We weren\'t sure Wellesley needed another coffee shop."'
+    ],
+    caption: 'Turns out it didn\'t need another one. It needed this one. We know the difference now. Thank you for making that clear.',
+    onimage: 'Four years. Thank you, Wellesley.',
+    cta: 'If you\'ve been here since the beginning — first drink this week is on us.',
+    visual: 'Short montage reel or carousel — old photos of the shop, early days, familiar corners, the same counter across four years. End on a current shot. Warm grade, ambient shop sound if reel.',
+    time: 'Friday 9–11am'
+  },
+  'w4-tue': {
+    title: 'The Welcome — This Is the Nudge',
+    date: 'Tuesday, April 28 · Best time: 11am–1pm',
+    format: 'Single Photo',
+    hooks: [
+      '"If you\'ve been meaning to come in."',
+      '"This is the nudge."'
+    ],
+    caption: 'You don\'t need to know the menu. You don\'t need to know what a cortado is or isn\'t. You just need to walk through the door. We\'ll take it from there.',
+    onimage: 'Walk in. We\'ll take it from there.',
+    cta: 'Walk-ins always. Tell us it\'s your first time.',
+    visual: 'Shot from outside the shop looking in through the window — warm interior light, a few people at tables, a barista visible behind the counter. Taken from street level. Inviting without being posed.',
+    time: 'Tuesday 11am–1pm'
+  },
+  'w4-thu': {
+    title: 'The Craft — Version Four',
+    date: 'Thursday, April 30 · Best time: 7–9am',
+    format: 'Single Photo — Flat Lay',
+    hooks: [
+      '"Version one was wrong."',
+      '"We almost didn\'t put it on the menu."'
+    ],
+    caption: 'Version one was too floral. Version two too sweet. Version three nearly made it. We pulled it anyway. Version four has been on the menu for two weeks and we\'re still proud of it every time we make it.',
+    onimage: 'Version four.',
+    cta: 'The honey lavender. Here through spring.',
+    visual: 'Close crop of the finished honey lavender latte — the surface of the drink, honey drizzle still settling, lavender sprig off to the side. Shot tight. Nothing decorative, just the drink.',
+    time: 'Thursday 7–9am'
+  },
+  'w4-sun': {
+    title: 'Morning Ritual — Sunday',
+    date: 'Sunday, May 4 · Best time: 8–11am',
+    format: 'Single Photo',
+    hooks: [
+      '"No alarm. No agenda."',
+      '"Sunday."'
+    ],
+    caption: 'Stay as long as you need. That\'s the whole point of today.',
+    onimage: 'Stay as long as you need.',
+    cta: 'We\'ll be here.',
+    visual: 'Window seat — a single drink on the table, soft diffused overcast light, a book or journal just barely in the bottom corner of the frame. No person. Shot wide enough to show the whole table and the light outside.',
+    time: 'Sunday 8–11am'
+  }
+};
+
+let currentPostId = null;
+let selectedHookIndex = null;
+
+function openModal(id) {
+  const p = posts[id];
+  if (!p) return;
+  currentPostId = id;
+  selectedHookIndex = null;
+
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-date').textContent = p.date;
+
+  const hooksHtml = p.hooks.map((h, i) =>
+    `<div class="modal-hook" onclick="selectHook(${i})" id="hook-opt-${i}">
+      <span class="hook-num">${i+1}</span>
+      <span class="hook-text">${h}</span>
+    </div>`
+  ).join('');
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="modal-section">
+      <div class="modal-section-label">Hook Options — tap to select</div>
+      <div class="modal-hooks">${hooksHtml}</div>
+      <div class="hook-select-hint">Select a hook to build your ready-to-post caption</div>
+    </div>
+
+    <div class="composed-block" id="composed-block">
+      <div class="composed-label">Your Post — ready to copy</div>
+      <textarea class="composed-textarea" id="composed-text" readonly></textarea>
+      <button class="composed-copy-btn" id="composed-copy-btn" onclick="copyComposed()">Copy to Clipboard</button>
+    </div>
+
+    <div class="modal-section" style="margin-top:24px;">
+      <div class="modal-section-label">On-Image Text</div>
+      <div class="modal-cta" style="font-family:'Playfair Display',serif; font-style:italic; letter-spacing:0.03em;">${p.onimage}</div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">Photo Direction</div>
+      <div class="modal-visual">${p.visual}</div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">Post Details</div>
+      <div class="modal-meta">
+        <div class="modal-meta-item">
+          <span class="modal-section-label">Format</span>
+          <span class="modal-meta-val">${p.format}</span>
+        </div>
+        <div class="modal-meta-item">
+          <span class="modal-section-label">Best Time</span>
+          <span class="modal-meta-val">${p.time}</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function selectHook(index) {
+  const p = posts[currentPostId];
+  if (!p) return;
+
+  // Deselect all hooks
+  document.querySelectorAll('.modal-hook').forEach(el => el.classList.remove('selected'));
+
+  // If clicking the already selected hook, deselect and hide composed
+  if (selectedHookIndex === index) {
+    selectedHookIndex = null;
+    document.getElementById('composed-block').classList.remove('visible');
+    return;
+  }
+
+  // Select this hook
+  selectedHookIndex = index;
+  document.getElementById(`hook-opt-${index}`).classList.add('selected');
+
+  // Build composed text: hook + blank line + caption + blank line + CTA
+  const hookText = p.hooks[index].replace(/^"|"$/g, ''); // strip wrapping quotes
+  const composed = `${hookText}\n\n${p.caption}\n\n${p.cta}`;
+
+  const textarea = document.getElementById('composed-text');
+  textarea.value = composed;
+
+  // Auto-size textarea to content
+  textarea.style.height = 'auto';
+  textarea.style.height = (textarea.scrollHeight + 8) + 'px';
+
+  // Show the composed block
+  const block = document.getElementById('composed-block');
+  block.classList.add('visible');
+
+  // Reset copy button
+  const btn = document.getElementById('composed-copy-btn');
+  btn.textContent = 'Copy to Clipboard';
+  btn.classList.remove('copied');
+}
+
+function copyComposed() {
+  const textarea = document.getElementById('composed-text');
+  if (!textarea) return;
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    const btn = document.getElementById('composed-copy-btn');
+    btn.textContent = '✓ Copied to Clipboard';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy to Clipboard';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+function copyText(id) {
+  const postId = id.replace('-caption','');
+  const p = posts[postId];
+  if (p) {
+    navigator.clipboard.writeText(p.caption + '\n\n' + p.cta).then(() => {
+      const btn = event.target;
+      btn.textContent = '✓ Copied';
+      setTimeout(() => btn.textContent = 'Copy Caption', 2000);
+    });
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  currentPostId = null;
+  selectedHookIndex = null;
+}
+
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+// ── MINI CALENDAR ──
+const postDates = {
+  // April 2025
+  '2025-4-7':  { id: 'w1-mon', pillar: 'ritual',    label: 'Morning Ritual',  week: 1 },
+  '2025-4-9':  { id: 'w1-wed', pillar: 'welcome',   label: 'The Welcome',     week: 1 },
+  '2025-4-11': { id: 'w1-fri', pillar: 'community', label: 'Community',       week: 1 },
+  '2025-4-13': { id: 'w1-sun', pillar: 'craft',     label: 'The Craft',       week: 1 },
+  '2025-4-15': { id: 'w2-tue', pillar: 'ritual',    label: 'Morning Ritual',  week: 2 },
+  '2025-4-17': { id: 'w2-thu', pillar: 'welcome',   label: 'The Welcome',     week: 2 },
+  '2025-4-19': { id: 'w2-sat', pillar: 'community', label: 'Community',       week: 2 },
+  '2025-4-21': { id: 'w3-mon', pillar: 'craft',     label: 'The Craft',       week: 3 },
+  '2025-4-23': { id: 'w3-wed', pillar: 'ritual',    label: 'Morning Ritual',  week: 3 },
+  '2025-4-25': { id: 'w3-fri', pillar: 'community', label: 'Community',       week: 3 },
+  '2025-4-28': { id: 'w4-tue', pillar: 'welcome',   label: 'The Welcome',     week: 4 },
+  '2025-4-30': { id: 'w4-thu', pillar: 'craft',     label: 'The Craft',       week: 4 },
+  // May 2025
+  '2025-5-4':  { id: 'w4-sun', pillar: 'ritual',    label: 'Morning Ritual',  week: 4 },
+};
+
+const pillarColors = {
+  craft:     '#C4956A',
+  ritual:    '#7A8C6E',
+  community: '#6B8CAE',
+  welcome:   '#AE6B7A',
+};
+
+let miniCalYear  = 2025;
+let miniCalMonth = 4; // April
+let miniCalOpen  = false;
+
+function toggleMiniCal() {
+  miniCalOpen = !miniCalOpen;
+  const popup = document.getElementById('mini-cal-popup');
+  const btn   = document.getElementById('cal-toggle-btn');
+  if (miniCalOpen) {
+    renderMiniCal();
+    popup.classList.add('open');
+    btn.classList.add('open');
+  } else {
+    popup.classList.remove('open');
+    btn.classList.remove('open');
+  }
+}
+
+function renderMiniCal() {
+  const popup = document.getElementById('mini-cal-popup');
+  const monthNames = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+  const dows = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+  const firstDay = new Date(miniCalYear, miniCalMonth - 1, 1).getDay();
+  const daysInMonth = new Date(miniCalYear, miniCalMonth, 0).getDate();
+  const today = new Date();
+
+  // Update toggle button label
+  document.getElementById('cal-toggle-btn').innerHTML = `
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="1" y="2" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M1 5.5H13" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M4.5 1V3.5M9.5 1V3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    ${monthNames[miniCalMonth - 1]} ${miniCalYear}
+  `;
+
+  // Build day cells
+  let cells = '';
+  // Empty cells before first day
+  for (let i = 0; i < firstDay; i++) {
+    cells += `<div class="mini-cal-day empty"></div>`;
+  }
+  // Day cells
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${miniCalYear}-${miniCalMonth}-${d}`;
+    const post = postDates[key];
+    const isToday = today.getFullYear() === miniCalYear &&
+                    today.getMonth() + 1 === miniCalMonth &&
+                    today.getDate() === d;
+    let cls = 'mini-cal-day';
+    let style = '';
+    let tooltip = '';
+    let onclick = '';
+    if (post) {
+      cls += ' has-post';
+      style = `style="background:${pillarColors[post.pillar]};"`;
+      tooltip = `<span class="mini-cal-post-tooltip">${post.label}</span>`;
+      onclick = `onclick="jumpToPost('${post.id}', ${post.week})"`;
+    }
+    if (isToday) cls += ' today';
+    cells += `<div class="${cls}" ${style} ${onclick}>${d}${tooltip}</div>`;
+  }
+
+  // DOW headers
+  const dowHtml = dows.map(d => `<div class="mini-cal-dow">${d}</div>`).join('');
+
+  popup.innerHTML = `
+    <div class="mini-cal-header">
+      <div class="mini-cal-month">${monthNames[miniCalMonth - 1]} ${miniCalYear}</div>
+      <div class="mini-cal-nav">
+        <button class="mini-cal-nav-btn" onclick="shiftMonth(-1)">‹</button>
+        <button class="mini-cal-nav-btn" onclick="shiftMonth(1)">›</button>
+      </div>
+    </div>
+    <div class="mini-cal-grid">
+      ${dowHtml}
+      ${cells}
+    </div>
+    <div class="mini-cal-legend">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:10px;height:10px;background:${pillarColors.craft};border-radius:3px;"></div><span class="mini-cal-legend-text">Craft</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:10px;height:10px;background:${pillarColors.ritual};border-radius:3px;"></div><span class="mini-cal-legend-text">Ritual</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:10px;height:10px;background:${pillarColors.community};border-radius:3px;"></div><span class="mini-cal-legend-text">Community</span></div>
+        <div style="display:flex;align-items:center;gap:5px;"><div style="width:10px;height:10px;background:${pillarColors.welcome};border-radius:3px;"></div><span class="mini-cal-legend-text">Welcome</span></div>
+      </div>
+    </div>
+  `;
+}
+
+function shiftMonth(dir) {
+  miniCalMonth += dir;
+  if (miniCalMonth > 12) { miniCalMonth = 1; miniCalYear++; }
+  if (miniCalMonth < 1)  { miniCalMonth = 12; miniCalYear--; }
+  renderMiniCal();
+}
+
+function jumpToPost(postId, week) {
+  // Switch to the correct week
+  document.getElementById('week-' + currentWeek).classList.remove('active');
+  currentWeek = week;
+  document.getElementById('week-' + currentWeek).classList.add('active');
+  document.getElementById('week-label').textContent = 'Week ' + currentWeek;
+  applyFilter();
+  // Close the mini cal
+  toggleMiniCal();
+  // Open the post modal after a brief delay so the week transition renders
+  setTimeout(() => openModal(postId), 120);
+}
+
+// Close mini cal when clicking outside
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('cal-popup-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      const popup = document.getElementById('mini-cal-popup');
+      const btn   = document.getElementById('cal-toggle-btn');
+      if (miniCalOpen) {
+        miniCalOpen = false;
+        popup.classList.remove('open');
+        btn.classList.remove('open');
+      }
+    }
+  });
+});
+
+function generateCalendar() {
+  const btn = document.querySelector('.brief-generate-btn');
+  btn.textContent = 'Building your calendar...';
+  btn.style.opacity = '0.7';
+  setTimeout(() => {
+    btn.textContent = 'Calendar Generated — View in Content Calendar →';
+    btn.style.opacity = '1';
+    btn.style.background = 'var(--sage)';
+    setTimeout(() => {
+      document.querySelectorAll('.nav-tab')[1].click();
+    }, 800);
+  }, 1800);
+}
+</script>
+</body>
+</html>
